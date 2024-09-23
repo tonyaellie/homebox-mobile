@@ -1,7 +1,7 @@
 import { Button, Text, TextInput, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useHBStore } from '../store';
-import { Redirect } from 'expo-router';
+import { Link, Redirect } from 'expo-router';
 
 export default function Login() {
   const { api } = useHBStore();
@@ -16,7 +16,11 @@ export default function Login() {
         <Text className="text-center text-xl text-red-600">
           This is for testing, your details will not be securely stored, DO NOT
           USE IN PRODUCTION also it wont tell you if you get your details wrong
+          leave feedback on the github
         </Text>
+        <Link href="https://github.com/tonyaellie/homebox-mobile">
+          <Text className="text-xl underline text-center">Github</Text>
+        </Link>
         <Text className="font-bold">Username</Text>
         <TextInput
           className="h-10 border p-2"
