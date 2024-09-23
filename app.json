@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "homebox-mobile",
-    "slug": "homebox-mobile",
+    "slug": "homebox",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -31,6 +31,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "20c63b22-2ba3-48fe-91ce-45019dccc921"
+      }
+    },
+    "owner": "tonya"
   }
 }
