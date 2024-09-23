@@ -1,7 +1,7 @@
 {
   "name": "homebox-mobile",
   "main": "expo-router/entry",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -9,7 +9,8 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "setup": "npx openapi-typescript https://converter.swagger.io/api/convert?url=https://raw.githubusercontent.com/sysadminsmedia/homebox/main/docs/docs/api/openapi-2.0.json -o ./api.d.ts"
+    "setup": "npx openapi-typescript https://converter.swagger.io/api/convert?url=https://raw.githubusercontent.com/sysadminsmedia/homebox/main/docs/docs/api/openapi-2.0.json -o ./api.d.ts",
+    "build": "npx eas-cli build -p android --profile production --local"
   },
   "jest": {
     "preset": "jest-expo"
