@@ -14,6 +14,8 @@ export default function RootLayout() {
           <Stack.Screen name="login" options={{ title: 'Login' }} />
           <Stack.Screen name="index" options={{ title: 'Home' }} />
           <Stack.Screen name="item/[id]" />
+          <Stack.Screen name="location/[id]" />
+          <Stack.Screen name="label/[id]" />
         </Stack>
       </StoreInit>
     </QueryClientProvider>

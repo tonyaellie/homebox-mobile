@@ -8,7 +8,7 @@ export default function Item() {
   const { id, name } = useLocalSearchParams();
   const router = useRouter();
 
-  const query = api!.useQuery('get', `/v1/items/{id}`, {
+  const query = api!.useQuery('get', `/v1/locations/{id}`, {
     params: {
       path: {
         id: id as string,
@@ -16,15 +16,15 @@ export default function Item() {
     },
   });
 
-  const item = query.data;
+  const location = query.data;
 
   useEffect(() => {
-    if (item) {
+    if (location) {
       router.setParams({
-        name: item.name,
+        name: location.name,
       });
     }
-  }, [item]);
+  }, [location]);
 
   return (
     <View>
@@ -34,7 +34,7 @@ export default function Item() {
         }}
       />
       <Text>
-        {id} - {item?.name}
+        {id} - {location?.name}
       </Text>
     </View>
   );

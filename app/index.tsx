@@ -24,11 +24,11 @@ export default function Index() {
         title="Logout"
         onPress={async () => await useHBStore.getState().logout()}
       />
-      <Link href="/location/new" asChild>
+      {/* <Link href="/location/new" asChild>
         <Pressable className="rounded-full bg-blue-400 p-2 absolute bottom-2 right-2">
           <Plus size={36} color="black" />
         </Pressable>
-      </Link>
+      </Link> */}
       {query?.data ? (
         <View className="w-full flex-grow">
           <FlashList
@@ -58,8 +58,8 @@ export default function Index() {
                   </View>
                   {item.labels && item.labels.length > 0 && (
                     <View className="flex flex-row gap-2 flex-wrap">
-                      {item.labels.map((label) => (
-                        <Link href={`/label/${label.id}`} asChild>
+                      {item.labels.map((label, i) => (
+                        <Link href={`/label/${label.id}`} asChild key={i}>
                           <Pressable className="bg-blue-300 rounded-full px-2 h-6 min-w-6 flex items-center justify-center">
                             <Text>{label.name}</Text>
                           </Pressable>
