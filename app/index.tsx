@@ -8,16 +8,17 @@ import {
   View,
 } from 'react-native';
 import { useHBStore } from '../store';
-import { Link, Redirect } from 'expo-router';
-import { FlashList } from '@shopify/flash-list';
-import { MapPin } from 'lucide-react-native';
-import { Plus } from 'lucide-react-native';
+import { Redirect } from 'expo-router';
 import { ItemList } from '../components/ItemList';
 
 export default function Index() {
   const { api, url, accessToken } = useHBStore();
 
-  const query = api!.useQuery('get', '/v1/items');
+  if (!api) {
+    return <Redirect href="/login" />;
+  }
+
+  const query = api.useQuery('get', '/v1/items');
 
   return (
     <View className="flex-1">

@@ -1,4 +1,10 @@
-import { Link, Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import {
+  Link,
+  Redirect,
+  Stack,
+  useLocalSearchParams,
+  useRouter,
+} from 'expo-router';
 import { Image, Pressable, ScrollView, Text, View } from 'react-native';
 import { useHBStore } from '../../store';
 import { useEffect } from 'react';
@@ -42,7 +48,11 @@ export default function Item() {
   const router = useRouter();
   const format = useFormatCurrency();
 
-  const query = api!.useQuery('get', `/v1/items/{id}`, {
+  if (!api) {
+    return <Redirect href="/login" />;
+  }
+
+  const query = api.useQuery('get', `/v1/items/{id}`, {
     params: {
       path: {
         id: id as string,

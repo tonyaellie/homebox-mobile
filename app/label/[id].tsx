@@ -1,4 +1,4 @@
-import { Link, Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import { Link, Redirect, Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 import { useHBStore } from '../../store';
 import { useEffect } from 'react';
@@ -10,7 +10,11 @@ export default function Item() {
   const { id, name } = useLocalSearchParams();
   const router = useRouter();
 
-  const query = api!.useQuery('get', `/v1/labels/{id}`, {
+  if (!api) {
+    return <Redirect href="/login" />;
+  }
+
+  const query = api.useQuery('get', `/v1/labels/{id}`, {
     params: {
       path: {
         id: id as string,
@@ -20,7 +24,7 @@ export default function Item() {
 
   const label = query.data;
 
-  const queryItems = api!.useQuery('get', `/v1/items`, {
+  const queryItems = api.useQuery('get', `/v1/items`, {
     params: {
       query: {
         labels: [id as string],
