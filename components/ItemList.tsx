@@ -1,8 +1,16 @@
-import { Image, Pressable, RefreshControl, Text, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  Pressable,
+  RefreshControl,
+  Text,
+  View,
+} from 'react-native';
 import { Link } from 'expo-router';
-import { FlashList } from '@shopify/flash-list';
 import { MapPin } from 'lucide-react-native';
 import type Api from '../api';
+
+// TODO: switch to flashlist for better performance
 
 export const ItemList = ({
   items,
@@ -19,8 +27,7 @@ export const ItemList = ({
 }) => {
   return (
     <View className="w-full flex-grow">
-      <FlashList
-        estimatedItemSize={126}
+      <FlatList
         refreshControl={
           <RefreshControl refreshing={isFetching} onRefresh={refetch} />
         }
@@ -30,7 +37,7 @@ export const ItemList = ({
             <Pressable className="border w-max m-2 rounded p-2 gap-2">
               <View className="flex flex-row items-center gap-2">
                 <Text className="font-bold text-lg">{item.name}</Text>
-                <View className="rounded-full bg-pink-300 px-2 h-6 min-w-6 flex items-center justify-center">
+                <View className="rounded-full bg-pink-500 px-2 h-6 min-w-6 flex items-center justify-center">
                   <Text>{item.quantity}</Text>
                 </View>
                 <View className="flex-grow" />

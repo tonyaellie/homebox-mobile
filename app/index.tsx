@@ -1,12 +1,4 @@
-import {
-  Button,
-  Image,
-  Pressable,
-  RefreshControl,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { useHBStore } from '../store';
 import { Redirect } from 'expo-router';
 import { ItemList } from '../components/ItemList';
