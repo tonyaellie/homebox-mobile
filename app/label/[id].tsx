@@ -1,4 +1,10 @@
-import { Link, Redirect, Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import {
+  Link,
+  Redirect,
+  Stack,
+  useLocalSearchParams,
+  useRouter,
+} from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 import { useHBStore } from '../../store';
 import { useEffect } from 'react';
@@ -32,7 +38,7 @@ export default function Item() {
     },
   });
 
-  const items = queryItems.data?.items;
+  const items = queryItems.data;
 
   useEffect(() => {
     if (label) {
@@ -42,7 +48,7 @@ export default function Item() {
     }
   }, [label]);
 
-  if (!label || !items) {
+  if (!label) {
     return (
       <View>
         <Stack.Screen
@@ -71,13 +77,19 @@ export default function Item() {
       </Text>
       <Text>{label.description}</Text>
       <Text>Items</Text>
-      <ItemList
-        items={items}
-        isFetching={queryItems.isFetching}
-        refetch={queryItems.refetch}
-        url={url!}
-        token={accessToken!.token}
-      />
+      {queryItems.isError ? (
+        <Text>Error: {JSON.stringify(queryItems.error)}</Text>
+      ) : queryItems.data?.items ? (
+        <ItemList
+          items={queryItems.data.items}
+          isFetching={queryItems.isFetching}
+          refetch={queryItems.refetch}
+          url={url!}
+          token={accessToken!.token}
+        />
+      ) : (
+        <Text>Loading items...</Text>
+      )}
     </View>
   );
 }

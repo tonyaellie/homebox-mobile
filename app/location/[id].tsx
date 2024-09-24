@@ -32,8 +32,6 @@ export default function Item() {
     },
   });
 
-  const items = queryItems.data?.items;
-
   useEffect(() => {
     if (location) {
       router.setParams({
@@ -42,7 +40,7 @@ export default function Item() {
     }
   }, [location]);
 
-  if (!location || !items) {
+  if (!location) {
     return (
       <View>
         <Stack.Screen
@@ -71,13 +69,19 @@ export default function Item() {
       </Text>
       <Text>{location.description}</Text>
       <Text>Items</Text>
-      <ItemList
-        items={items}
-        isFetching={queryItems.isFetching}
-        refetch={queryItems.refetch}
-        url={url!}
-        token={accessToken!.token}
-      />
+      {queryItems.isError ? (
+        <Text>Error: {JSON.stringify(queryItems.error)}</Text>
+      ) : queryItems.data?.items ? (
+        <ItemList
+          items={queryItems.data.items}
+          isFetching={queryItems.isFetching}
+          refetch={queryItems.refetch}
+          url={url!}
+          token={accessToken!.token}
+        />
+      ) : (
+        <Text>Loading items...</Text>
+      )}
     </View>
   );
 }
