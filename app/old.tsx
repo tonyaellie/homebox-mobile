@@ -14,6 +14,7 @@ export default function Index() {
 
   return (
     <View className="flex-1">
+      <Text>{url} - {query.failureReason}</Text>
       <Button
         title="Logout"
         onPress={async () => {

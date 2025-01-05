@@ -7,7 +7,7 @@ import { ItemList } from '../../components/ItemList';
 
 export default function Item() {
   const { api, url, accessToken } = useHBStore();
-  const { id, name } = useLocalSearchParams();
+  const { id } = useLocalSearchParams();
   const router = useRouter();
 
   if (!api) {
@@ -32,20 +32,12 @@ export default function Item() {
     },
   });
 
-  useEffect(() => {
-    if (location) {
-      router.setParams({
-        name: location.name,
-      });
-    }
-  }, [location]);
-
   if (!location) {
     return (
       <View>
         <Stack.Screen
           options={{
-            title: (name || 'Loading location...') as string,
+            title: 'Loading location...',
           }}
         />
       </View>
@@ -56,7 +48,7 @@ export default function Item() {
     <View className="flex-1">
       <Stack.Screen
         options={{
-          title: (name || 'Loading...') as string,
+          title: (location.name || 'Loading...') as string,
         }}
       />
       <Text>

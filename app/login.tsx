@@ -45,20 +45,25 @@ export default function Login() {
       <Button
         title="Login"
         onPress={async () => {
-          const fetchClient = createFetchClient<Api.paths>({
-            baseUrl: url,
-          });
+          try {
+            const fetchClient = createFetchClient<Api.paths>({
+              baseUrl: url,
+            });
 
-          const { data, error } = await fetchClient.POST('/v1/users/login', {
-            body: {
-              username,
-              password,
-            },
-          });
+            const { error } = await fetchClient.POST('/v1/users/login', {
+              body: {
+                username,
+                password,
+              },
+            });
 
-          if (error) {
-            setError('Failed to login!');
-            return
+            if (error) {
+              setError('Failed to login!');
+              return;
+            }
+          } catch (e) {
+            setError('Failed to login! ' + JSON.stringify(e));
+            return;
           }
 
           await useHBStore.getState().login(username, password, url);

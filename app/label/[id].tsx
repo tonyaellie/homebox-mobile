@@ -1,19 +1,17 @@
 import {
-  Link,
   Redirect,
   Stack,
   useLocalSearchParams,
   useRouter,
 } from 'expo-router';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useHBStore } from '../../store';
-import { useEffect } from 'react';
 import dayjs from 'dayjs';
 import { ItemList } from '../../components/ItemList';
 
 export default function Item() {
   const { api, url, accessToken } = useHBStore();
-  const { id, name } = useLocalSearchParams();
+  const { id } = useLocalSearchParams();
   const router = useRouter();
 
   if (!api) {
@@ -38,22 +36,12 @@ export default function Item() {
     },
   });
 
-  const items = queryItems.data;
-
-  useEffect(() => {
-    if (label) {
-      router.setParams({
-        name: label.name,
-      });
-    }
-  }, [label]);
-
   if (!label) {
     return (
       <View>
         <Stack.Screen
           options={{
-            title: (name || 'Loading label...') as string,
+            title: 'Loading label...',
           }}
         />
       </View>
@@ -64,7 +52,7 @@ export default function Item() {
     <View className="flex-1">
       <Stack.Screen
         options={{
-          title: (name || 'Loading...') as string,
+          title: (label.name || 'Loading...') as string,
         }}
       />
       <Text>

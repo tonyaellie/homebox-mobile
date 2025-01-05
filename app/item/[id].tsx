@@ -44,7 +44,7 @@ const useFormatCurrency = () => {
 
 export default function Item() {
   const { api, url, accessToken } = useHBStore();
-  const { id, name } = useLocalSearchParams();
+  const { id } = useLocalSearchParams();
   const router = useRouter();
   const format = useFormatCurrency();
 
@@ -62,20 +62,12 @@ export default function Item() {
 
   const item = query.data;
 
-  useEffect(() => {
-    if (item) {
-      router.setParams({
-        name: item.name,
-      });
-    }
-  }, [item]);
-
   if (!item) {
     return (
       <View>
         <Stack.Screen
           options={{
-            title: (name || 'Loading Item...') as string,
+            title: 'Loading Item...',
           }}
         />
       </View>
@@ -86,7 +78,7 @@ export default function Item() {
     <ScrollView>
       <Stack.Screen
         options={{
-          title: (name || 'Loading...') as string,
+          title: (item.name || 'Loading...') as string,
         }}
       />
       <View>
